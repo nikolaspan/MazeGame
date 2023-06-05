@@ -68,10 +68,31 @@ void MazeGame::drawMaze() {
 }
 
 void MazeGame::drawPlayersAndGem() {
+ if (has_colors() == TRUE) {
+ start_color();
+ init_pair(1, COLOR_GREEN, COLOR_BLACK);
+ init_pair(2, COLOR_RED, COLOR_BLACK);
+ init_pair(3, COLOR_MAGENTA, COLOR_BLACK);
+
+ attron(COLOR_PAIR(1));
+ mvaddch(player2.getPosition().row, player2.getPosition().col, PLAYER2_CHAR);
+ attroff(COLOR_PAIR(1));
+
+ attron(COLOR_PAIR(2));
+ mvaddch(player1.getPosition().row, player1.getPosition().col, PLAYER1_CHAR);
+ attroff(COLOR_PAIR(2));
+
+ attron(COLOR_PAIR(3));
+ mvaddch(gem.getPosition().row, gem.getPosition().col, GEM_CHAR);
+ attroff(COLOR_PAIR(3));
+ } else {
  mvaddch(player1.getPosition().row, player1.getPosition().col, PLAYER1_CHAR);
  mvaddch(player2.getPosition().row, player2.getPosition().col, PLAYER2_CHAR);
  mvaddch(gem.getPosition().row, gem.getPosition().col, GEM_CHAR);
+ }
 }
+
+
 
 void MazeGame::repositionGem() {
  Position newPos;
